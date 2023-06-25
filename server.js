@@ -6,7 +6,7 @@ const cors = require('cors');
 const routes = require('./routes');
 const cwd = process.cwd();
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 10000;
 const app = express();
 
 const activity = cwd.includes('heroku') ? 'production' : 'development';
