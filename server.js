@@ -9,17 +9,13 @@ const cwd = process.cwd();
 const PORT = process.env.PORT || 10000;
 const app = express();
 
-const activity = cwd.includes('heroku') ? 'production' : 'development';
+const activity = cwd.includes('render') ? 'production' : 'development';
 
+app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-//set us cors to allow us to accept requests from our client on localhost 3000
-// app.use(cors({
-//     origin: ['http://localhost:3000'],
-//     credentials: true,
-// }));
 app.use(routes);
 
 db.once('open', () => {
