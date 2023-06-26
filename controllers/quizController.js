@@ -2,6 +2,23 @@ const { ObjectId } = require('mongodb');
 const User  = require('../models/User');
 const Quiz = require('../models/Quiz');
 
+const getAllQuizzes = async (req, res) => {
+
+    try {
+        const quizzes = await Quiz.find();
+
+        if (!quizzes) {
+            res.status(404).json({ message: 'No quizzes found!' });
+            return;
+        }
+
+        res.status(200).json(quizzes);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+};
+
+
 const getQuiz = async (req, res) => {
     try {
         const quiz = await Quiz.findById(req.params.id);
@@ -89,4 +106,4 @@ const deleteQuizResults = async (req, res) => {
 
 
 
-module.exports = { getQuiz, postQuiz, postQuizResults, deleteQuizResults };
+module.exports = { getQuiz, postQuiz, postQuizResults, deleteQuizResults, getAllQuizzes };
