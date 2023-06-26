@@ -1,6 +1,9 @@
 const router = require('express').Router();
 
-const { getQuiz, postQuiz, postQuizResults, deleteQuizResults } = require('../../controllers/quizController')
+const { getQuiz, postQuiz, postQuizResults, deleteQuizResults, getAllQuizzes } = require('../../controllers/quizController')
+
+// GET /api/quiz
+router.route('/').get(getAllQuizzes);
 
 // GET /api/quiz
 router.route('/:id').get(getQuiz);
