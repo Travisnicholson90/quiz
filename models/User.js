@@ -29,10 +29,12 @@ const UserSchema = new Schema({
             default: Date.now
           }
         },
-        //create virtuals 
-        virtuals: true,
-        toJSON: { virtuals: true },
-        id: false
+      },
+        {
+          toJSON: {
+            virtuals: true,
+        },
+        id: false,
       },
     ],
   });
@@ -46,7 +48,7 @@ const UserSchema = new Schema({
   UserSchema.virtual('createdDate').get(function () {
     return this.created.toDateString();
   });
-  
+
 //hash user password
 UserSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt();
