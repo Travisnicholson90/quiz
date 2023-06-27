@@ -24,12 +24,29 @@ const UserSchema = new Schema({
         score: {
           type: Number,
           required: true,
+          created: {
+            type: Date,
+            default: Date.now
+          }
         },
+        //create virtuals 
+        virtuals: true,
+        toJSON: { virtuals: true },
+        id: false
       },
     ],
   });
   
+  // create a virtual called quiz that take the quiz id from the quizzes array and finds the quiz
+  UserSchema.virtual('quiz').get(function () {
+    return this.quizzes.map((quiz) => quiz.quiz);
+  });
 
+  //create a virtual that takes the created date and formats it to a string
+  UserSchema.virtual('createdDate').get(function () {
+    return this.created.toDateString();
+  });
+  
 //hash user password
 UserSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt();
