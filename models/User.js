@@ -27,15 +27,18 @@ const UserSchema = new Schema({
           created: {
             type: Date,
             default: Date.now,
-          },
+          }
         },
+      },
+        {
+          toJSON: {
+            virtuals: true,
+        },
+        id: false,
       },
     ],
   });
   
-  // add toJSON option to include virtuals and exclude the "_id" field
-UserSchema.set('toJSON', { virtuals: true, versionKey: false });
-
   // create a virtual called quiz that take the quiz id from the quizzes array and finds the quiz
   UserSchema.virtual('quiz', {
     ref: 'Quiz',
