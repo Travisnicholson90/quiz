@@ -40,8 +40,10 @@ const UserSchema = new Schema({
   });
   
   // create a virtual called quiz that take the quiz id from the quizzes array and finds the quiz
-  UserSchema.virtual('quiz').get(function () {
-    return this.quizzes.map((quiz) => quiz.quiz);
+  UserSchema.virtual('quiz', {
+    ref: 'Quiz',
+    localField: 'quizzes.quiz',
+    foreignField: '_id',
   });
 
   //create a virtual that takes the created date and formats it to a string
