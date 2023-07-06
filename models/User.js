@@ -1,43 +1,28 @@
 const { Schema, model, Types } = require('mongoose');
 const Quiz = require('./Quiz');
+const completedQuizSchema = require('./CompletedQuiz');
 const bcrypt = require('bcrypt');
 
 //create user schema
 const UserSchema = new Schema({
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      match: [/.+@.+\..+/, 'Must match an email address!'],
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    match: [/.+@.+\..+/, 'Must match an email address!'],
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 5,
+  },
+  completedQuizzes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'CompletedQuiz',
     },
-    password: {
-      type: String,
-      required: true,
-      minlength: 5,
-    },
-    quizzes: [
-      {
-        quiz: {
-          type: Schema.Types.ObjectId,
-          ref: 'Quiz',
-        },
-        score: {
-          type: Number,
-          required: true,
-          created: {
-            type: Date,
-            default: Date.now,
-          }
-        },
-      },
-        {
-          toJSON: {
-            virtuals: true,
-        },
-        id: false,
-      },
-    ],
-  });
+  ],
+});
   
   // create a virtual called quiz that take the quiz id from the quizzes array and finds the quiz
   UserSchema.virtual('quiz', {
