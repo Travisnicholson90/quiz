@@ -1,6 +1,6 @@
 const { Schema, model, Types } = require('mongoose');
 const Quiz = require('./Quiz');
-const completedQuizSchema = require('./CompletedQuiz');
+const CompletedQuiz = require('./CompletedQuiz');
 const bcrypt = require('bcrypt');
 
 //create user schema
