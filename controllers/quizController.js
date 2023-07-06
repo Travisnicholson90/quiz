@@ -53,12 +53,13 @@ const postQuiz = async (req, res) => {
     }
 };
 
-// post quiz results to user model
+// post quiz results completedQuiz model
 // api/quiz/score/:id(quiz id)/:userId(user id)
 const postQuizResults = async (req, res) => {
     try {
         const { quizId, userId } = req.params;
         const { score } = req.body;
+        console.log(quizId, userId, score);
 
         const completedQuiz = await CompletedQuiz.create({ quiz: quizId, score: score });
 
@@ -101,6 +102,7 @@ const deleteQuizResults = async (req, res) => {
         { $pull: { quizzes: { quiz: quizId } } },
         { new: true }
         );
+        console.log(user);
 
         if (!user) {
             res.status(404).json({ message: 'No user found with this id!' });
