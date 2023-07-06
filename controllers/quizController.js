@@ -62,6 +62,7 @@ const postQuizResults = async (req, res) => {
         console.log(quizId, userId, score);
 
         const completedQuiz = await CompletedQuiz.create({ quiz: quizId, score: score });
+        console.log(completedQuiz);
 
         if (!completedQuiz) {
             res.status(400).json({ message: 'Quiz results not created' });
