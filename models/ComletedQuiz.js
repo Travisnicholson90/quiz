@@ -3,7 +3,7 @@ const Quiz = require('./Quiz');
 const bcrypt = require('bcrypt');
 
 // Create completed quiz schema
-const CompletedQuizSchema = new Schema({
+const CompletedQuiz = new Schema({
   quiz: {
     type: Schema.Types.ObjectId,
     ref: 'Quiz',
