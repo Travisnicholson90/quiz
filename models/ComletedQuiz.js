@@ -18,4 +18,4 @@ const CompletedQuizSchema = new Schema({
   },
 });
 
-module.exports = CompletedQuizSchema;
+module.exports = CompletedQuiz;
